@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 25px;
+  background:  rgb(251, 249, 252);
+  
+}
+
+.logo-section {
+  display: flex;
+  align-items:center  ;
+  gap: 0px;
+}
+
+.workspace{
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0; /* Or match the padding of your other nav links */
+  color: #000; /* Match the exact text color of 'Home' and 'Courses' */
+  font-weight: normal; 
+}
+.logo {
+  width: 300px;
+  height: 80px;
+  border-radius: 0%;
+}
+
+.logo-section h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+
+nav a {
+  text-decoration: none;
+  color: rgb(19, 8, 48);
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: yellow;
+}

@@ -1,0 +1,169 @@
+/* CourseTA.css */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.ta-container{
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------- Heading ---------- */
+
+.course-title{
+    text-align: center;
+    font-size: 42px;
+    color: #f9fbfd;
+    margin-bottom: 35px;
+    font-weight: 700;
+}
+
+/* ---------- Description ---------- */
+
+.description-box{
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    margin-bottom: 45px;
+}
+
+.description-box h2{
+    color: #062249;
+    margin-bottom: 18px;
+    font-size: 28px;
+}
+
+.description-box p{
+    color: #3d3d3d;
+    line-height: 1.8;
+    font-size: 17px;
+    text-align: justify;
+}
+
+/* ---------- Journey ---------- */
+
+.journey h2{
+    color: #fcfdff;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.module{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+    border-radius: 15px;
+
+    padding: 15px 30px;
+
+    margin-bottom: 18px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+
+    transition: .3s;
+    cursor: pointer;
+}
+
+.module:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(0,0,0,.15);
+}
+
+.module h3{
+    color:#0b2d5c;
+    margin-bottom:-23px;
+    font-size:23px;
+    text-align: left;
+}
+
+.module p{
+    color:#060230;
+    font-size:24px;
+    text-align: justify;
+    margin-left: 150px;
+    
+}
+
+.play-icon{
+    font-size:45px;
+    color:#0b2d5c;
+    transition:.3s;
+}
+
+.module:hover .play-icon{
+    color:#1f6fd8;
+    transform:scale(1.1);
+}
+
+/* ---------- Learning Section ---------- */
+
+.learn{
+    margin-top:55px;
+    background:white;
+    padding:35px;
+    text-align: left;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.learn h2{
+    color:#0b2d5c;
+    margin-bottom:25px;
+    font-size:30px;
+}
+
+.learn ul{
+    list-style:none;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+}
+
+.learn li{
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    font-size:18px;
+    color:#444;
+}
+
+.learn svg{
+    color:#0b2d5c;
+    font-size:22px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+    .course-title{
+        font-size:32px;
+    }
+
+    .module{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .learn ul{
+        grid-template-columns:1fr;
+    }
+
+    .play-icon{
+        font-size:40px;
+    }
+}
