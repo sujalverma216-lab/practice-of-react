@@ -3,23 +3,24 @@
   justify-content: space-between;
   align-items: center;
   padding: 0px 25px;
-  background:  rgb(230, 228, 231);
-  
+  background: rgb(230, 228, 231);
+  position: relative; /* Added so the absolute mobile menu aligns properly */
 }
 
 .logo-section {
   display: flex;
-  align-items:center  ;
+  align-items: center;
   gap: 0px;
 }
 
-.workspace{
+.workspace {
   background-color: transparent;
   box-shadow: none;
-  padding: 0; /* Or match the padding of your other nav links */
-  color: #000; /* Match the exact text color of 'Home' and 'Courses' */
+  padding: 0;
+  color: #000;
   font-weight: normal; 
 }
+
 .logo {
   width: 300px;
   height: 80px;
@@ -35,8 +36,9 @@
   list-style: none;
   display: flex;
   gap: 25px;
+  margin: 0; 
+  padding: 0;
 }
-
 
 nav a {
   text-decoration: none;
@@ -48,4 +50,59 @@ nav a {
 
 nav a:hover {
   color: yellow;
+}
+
+/* --- New Hamburger Styles (Hidden on Desktop) --- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: rgb(19, 8, 48); 
+  transition: all 0.3s ease-in-out;
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+  .logo {
+    width: 150px;
+    height: 40px;
+    margin-left: -30px;
+    margin-bottom: -5px;
+  }
+  
+  .header {
+    width: 100%; /* Fixed missing colon and changed to 100% */
+  }
+
+  /* Show Hamburger Icon */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide normal nav links and prep for dropdown */
+  .navbar ul {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Distance from top. Adjust if your header is taller/shorter */
+    left: 0;
+    width: 100%;
+    background: rgb(230, 228, 231);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  /* Reveal menu when React adds the 'active' class */
+  .navbar ul.active {
+    display: flex;
+    gap: 15px; /* Spacing between links in mobile view */
+  }
 }
