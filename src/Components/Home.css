@@ -1,53 +1,97 @@
-.home{
-    height:100vh;
-    width:100%;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+.home {
+    min-height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
 
-    transition:background-image 1s ease-in-out;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.overlay{
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.45);
+.overlay {
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.hero{
-    text-align:center;
-    color:white;
+.hero {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    max-width: 800px;
 }
 
-.hero h1{
-    font-size:60px;
-    margin-bottom:15px;
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 15px;
+    line-height: 1.2;
 }
 
-.hero p{
-    font-size:24px;
-    margin-bottom:35px;
+.hero p {
+    font-size: 24px;
+    margin-bottom: 35px;
+    line-height: 1.6;
 }
 
-.btn{
-    padding:15px 35px;
-    font-size:20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#145da0;
-    color:white;
-    transition:.3s;
+.btn {
+    padding: 15px 35px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #145da0;
+    color: white;
+    transition: 0.3s;
 }
 
-.btn:hover{
-    background:#0b2d5c;
+.btn:hover {
+    background: #0b2d5c;
 }
+
+/* Tablets */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 20px;
+    }
+
+    .btn {
+        padding: 12px 28px;
+        font-size: 18px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 468px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .overlay {
+        padding: 15px;
+    }
+}
+
