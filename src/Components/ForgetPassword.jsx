@@ -29,10 +29,10 @@ function ForgetPassword() {
           <button type="submit" className="verify-btn">
             Verify OTP
           </button>
+          
+          < a href ="http://localhost:5173/login" className="loginlink"> Back to Login</a>
 
-          <Link to="/login" className="loginback">
-            <button>back to login</button>
-          </Link>
+
           
 
         </form>

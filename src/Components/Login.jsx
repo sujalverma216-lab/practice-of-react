@@ -38,7 +38,7 @@ else if (!emailRegex.test(email)) {
 
         <form className="login-form" onSubmit={handleSubmit}>
 
-          <label>Email Address</label>
+          <label className="email" >Email Address</label>
           <input
             type="email"
             placeholder="Enter your email"
@@ -64,9 +64,7 @@ else if (!emailRegex.test(email)) {
 
           <p className="signup-text">
             <b>Don't have an account? </b>
-            <Link to="/signup">
-              <button type="button">Sign Up</button>
-            </Link>
+            <a href ="http://localhost:5173/signup" className="signuplink"> Signup</a>
           </p>
 
           <p className="passresetbutton">

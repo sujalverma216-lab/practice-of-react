@@ -17,11 +17,11 @@
 }
 
 .form-container h1{
-    font-size:45px;
+    font-size:30px;
     text-align: left;
     color:#0b2d5c;
-    margin-top: -25px;
-    margin-bottom:30px;
+    margin-top:0px;
+    margin-bottom:0px;
 }
 
 .form-container label{
@@ -73,3 +73,4 @@
     border-radius:15px;
     box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
+

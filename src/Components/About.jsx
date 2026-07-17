@@ -5,7 +5,8 @@ function About() {
     <div className="about">
 
       <section className="about-hero">
-        <h1>About Eternal Education</h1>
+        <h1>About Eternal
+           Education</h1>
         <p>
           Learn Trading with Confidence. Build Wealth with Knowledge.
         </p>

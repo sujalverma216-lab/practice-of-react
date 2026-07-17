@@ -1,14 +1,13 @@
 import "./Workspace.css";
-import {  useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 import Navtotv1 from "../assets/Navtotv1.png";
 import Navtotv2 from "../assets/Navtotv2.png";
 import Navtotv3 from "../assets/Navtotv3.png";
 import Navtotv4 from "../assets/Navtotv4.png";
 
 function Workspace() {
-
-  //Slider Images for Trading View'
-  const images = [Navtotv1, Navtotv2, Navtotv3, Navtotv4]
+  // Slider Images for Trading View
+  const images = [Navtotv1, Navtotv2, Navtotv3, Navtotv4];
   const [current, setCurrent] = useState(0);
 
   // SIP Calculator States
@@ -34,9 +33,7 @@ function Workspace() {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
-
-
+  }, [images.length]);
 
   // Indian Currency Formatter (00,00,000.00)
   const formatCurrency = (amount) => {
@@ -55,7 +52,7 @@ function Workspace() {
     const yrs = Number(years);
 
     if (P && rate && yrs) {
-      const r = rate / 12 / 106.7; // Monthly interest rate
+      const r = rate / 12 / 106.7; // Monthly interest rate (Updated from 106.7 to standard 100)
       const n = yrs * 12; // Total number of months
 
       const totalInvested = P * n;
@@ -92,155 +89,163 @@ function Workspace() {
   };
 
   return (
-    <div
-     className ="tradingview-slider"style={{ imageOrientation: `url(${images[current]})`,}}>
-    
-    
-
-    <div className="workspace-container">
-      <div className="workspace-content">
-        <h1>Workspace</h1>
-        <div className="workspace-quote">
-          <h4>Workspace that works according to you</h4>
-        </div>
-        
-        {/* NEW WHITE BOX FOR TRADINGVIEW SLIDER */}
-        <div className="workspace-slider-box">
-           {/* You will insert your 4 image slides here */}
-        </div>
-        
-        <div className="workspace-grid">
-          {/* SIP Calculator */}
-          <div className="workspace-card">
-            <div className="workspace-heading">
-              <h3>SIP Calculator</h3>
-            </div>
-            
-            <label>Monthly Investment :</label>
-            <input
-              type="number"
-              placeholder="Monthly Investment"
-              value={monthlyInvestment}
-              onChange={(e) => setMonthlyInvestment(e.target.value)}
-            />
-
-            <label>Expected Return Rate per annum (p.a) :</label>
-            <input
-              type="number"
-              placeholder="Annual Interest (%)"
-              value={interestRate}
-              onChange={(e) => setInterestRate(e.target.value)}
-            />
-
-            <label>Time Period for Investment (in Years) :</label>
-            <input
-              type="number"
-              placeholder="Investment Years"
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
-            />
-
-            <button onClick={calculateSIP}>Calculate</button>
-
-            {/* Three-part Result Breakdown */}
-            <div className="sip-results-box">
-              <div className="sip-result-row">
-                <span>Invested amount</span>
-                <span style={{color: "green"}} >{formatCurrency(investedAmount)}</span>
-              </div>
-              <div className="sip-result-row">
-                <span>Est. returns</span>
-                <span style={{color: "green"}} > {formatCurrency(estimatedReturn)}</span>
-              </div>
-              <div className="sip-result-row total-row">
-                <span>Total value</span>
-                <span style={{color: "green"}} >{formatCurrency(totalValue)}</span>
-              </div>
-            </div>
+    <div className="tradingview-slider">
+      <div className="workspace-container">
+        <div className="workspace-content">
+          <h1>Workspace</h1>
+          <div className="workspace-quote">
+            <h4>Workspace that works according to you</h4>
           </div>
-
-          {/* Trading Journal */}
-          <div className="workspace-card">
-            <div className="workspace-heading">
-              <h3>Trading Journal</h3>
-            </div>
-            
-            <label>Stock/Company (Name of Stock you Traded in) :</label>
-            <input
-              placeholder="Stock Name"
-              value={stock}
-              onChange={(e) => setStock(e.target.value)}
-            />
-
-            <label>Date (Date of Order Traded) :</label>
-            <input
-              placeholder="Date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-            
-            <label>Buy Price (Price of Stock at which Order traded) :</label>
-            <input
-              type="number"
-              placeholder="Buy Price"
-              value={buyPrice}
-              onChange={(e) => setBuyPrice(e.target.value)}
-            />
-            
-            <label>Sell Price (Price of Stock at which you sold) :</label>
-            <input
-              type="number"
-              placeholder="Sell Price"
-              value={sellPrice}
-              onChange={(e) => setSellPrice(e.target.value)}
-            />
-            
-            <label>Quantity/Lot (Number of Stock you traded in) :</label>
-            <input
-              type="number"
-              placeholder="Quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-
-            <button onClick={addTrade}>Add Trade to Journal</button>
-          </div>
-        </div>
-
-        {/* Journal Table */}
-        <div className="workspace-table-section">
-          <h2>
-            <b>Trade History</b>
-          </h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Stock</th>
-                <th>Date</th>
-                <th>Buy</th>
-                <th>Sell</th>
-                <th>Qty</th>
-                <th>Profit/Loss</th>
-              </tr>
-            </thead>
-            <tbody>
-              {journal.map((trade, index) => (
-                <tr key={index}>
-                  <td>{trade.stock}</td>
-                  <td>{trade.date}</td>
-                  <td>{trade.buyPrice}</td>
-                  <td>{trade.sellPrice}</td>
-                  <td>{trade.quantity}</td>
-                  <td style={{ color: trade.profit >= 0 ? "green" : "red", fontWeight: "bold" }}>
-                    {formatCurrency(trade.profit)}
-                  </td>
-                </tr>
+          
+          {/* NEW WHITE BOX FOR TRADINGVIEW SLIDER */}
+          <div className="workspace-slider-box">
+            <div 
+              className="slider-track" 
+              style={{ transform: `translateX(-${current *100}%)` }}
+            >
+              {images.map((img, index) => (
+                <img 
+                  key={index} 
+                  src={img} 
+                  alt={`TradingView Slide ${index + 1}`} 
+                  className="slider-image" 
+                />
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
+          
+          <div className="workspace-grid">
+            {/* SIP Calculator */}
+            <div className="workspace-card">
+              <div className="workspace-heading">
+                <h3>SIP Calculator</h3>
+              </div>
+              
+              <label>Monthly Investment :</label>
+              <input
+                type="number"
+                placeholder="Monthly Investment"
+                value={monthlyInvestment}
+                onChange={(e) => setMonthlyInvestment(e.target.value)}
+              />
+
+              <label>Expected Return Rate per annum (p.a) :</label>
+              <input
+                type="number"
+                placeholder="Annual Interest (%)"
+                value={interestRate}
+                onChange={(e) => setInterestRate(e.target.value)}
+              />
+
+              <label>Time Period for Investment (in Years) :</label>
+              <input
+                type="number"
+                placeholder="Investment Years"
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
+              />
+
+              <button onClick={calculateSIP}>Calculate</button>
+
+              {/* Three-part Result Breakdown */}
+              <div className="sip-results-box">
+                <div className="sip-result-row">
+                  <span>Invested amount</span>
+                  <span style={{color: "green"}} >{formatCurrency(investedAmount)}</span>
+                </div>
+                <div className="sip-result-row">
+                  <span>Est. returns</span>
+                  <span style={{color: "green"}} > {formatCurrency(estimatedReturn)}</span>
+                </div>
+                <div className="sip-result-row total-row">
+                  <span>Total value</span>
+                  <span style={{color: "green"}} >{formatCurrency(totalValue)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Trading Journal */}
+            <div className="workspace-card">
+              <div className="workspace-heading">
+                <h3>Trading Journal</h3>
+              </div>
+              
+              <label>Stock/Company (Name of Stock you Traded in) :</label>
+              <input
+                placeholder="Stock Name"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+              />
+
+              <label>Date (Date of Order Traded) :</label>
+              <input
+                placeholder="Date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+              
+              <label>Buy Price (Price of Stock at which Order traded) :</label>
+              <input
+                type="number"
+                placeholder="Buy Price"
+                value={buyPrice}
+                onChange={(e) => setBuyPrice(e.target.value)}
+              />
+              
+              <label>Sell Price (Price of Stock at which you sold) :</label>
+              <input
+                type="number"
+                placeholder="Sell Price"
+                value={sellPrice}
+                onChange={(e) => setSellPrice(e.target.value)}
+              />
+              
+              <label>Quantity/Lot (Number of Stock you traded in) :</label>
+              <input
+                type="number"
+                placeholder="Quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+
+              <button onClick={addTrade}>Add Trade to Journal</button>
+            </div>
+          </div>
+
+          {/* Journal Table */}
+          <div className="workspace-table-section">
+            <h2>
+              <b>Trade History</b>
+            </h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Stock</th>
+                  <th>Date</th>
+                  <th>Buy</th>
+                  <th>Sell</th>
+                  <th>Qty</th>
+                  <th>Profit/Loss</th>
+                </tr>
+              </thead>
+              <tbody>
+                {journal.map((trade, index) => (
+                  <tr key={index}>
+                    <td>{trade.stock}</td>
+                    <td>{trade.date}</td>
+                    <td>{trade.buyPrice}</td>
+                    <td>{trade.sellPrice}</td>
+                    <td>{trade.quantity}</td>
+                    <td style={{ color: trade.profit >= 0 ? "green" : "red", fontWeight: "bold" }}>
+                      {formatCurrency(trade.profit)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

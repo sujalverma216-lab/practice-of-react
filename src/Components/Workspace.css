@@ -41,20 +41,32 @@
   margin: 0;
 }
 
-/* =========================================
-   NEW SLIDER BOX CSS
-   ========================================= */
-.workspace-container .workspace-slider-box {
-  background-color: #ffffff;
-  border-radius: 16px; /* Round corners */
+/* Container for the white box */
+.workspace-slider-box {
   width: 100%;
-  height: 375px; /* Adjust height based on your needs (350-400px) */
-  margin-bottom: 40px; /* Space between the box and the calculators below */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensures the images inside respect the rounded corners */
+  height: 400px; /* Adjust this height to perfectly match the gap you want */
+  overflow: hidden; 
+  position: relative;
+  border-radius: 12px; 
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 30px; /* Gives space before the Grid layout begins */
 }
-/* ========================================= */
 
+/* The track that holds all images in a single horizontal row */
+.slider-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out; /* The animation effect */
+}
+
+/* Individual images */
+.slider-image {
+  min-width: 100%; 
+  height: 100%;
+  object-fit:cover; 
+}
 .workspace-container .workspace-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

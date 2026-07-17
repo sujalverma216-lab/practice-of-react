@@ -64,7 +64,7 @@
 
 .input-group input:focus{
     border-color:#0b2d5c;
-    box-shadow:0 0 8px rgba(11,45,92,.2);
+    box-shadow:0 0 8px rgba(8, 39, 83, 0.2);
 }
 
 .signup-btn{
@@ -72,7 +72,7 @@
     padding:14px;
     border:none;
     border-radius:8px;
-    background:#000103;
+    background:#041538;
     color:#fff;
     font-size:16px;
     font-weight:bold;
@@ -83,6 +83,23 @@
 .signup-btn:hover{
     background:#145da0;
 }
+
+.login {
+    text-align: center;
+    color: black ;
+    margin-bottom: -65px;
+    margin-left: -55px;
+}
+
+.loginlink {
+    color: #01010e;
+    cursor:pointer;
+    transition:.3s;
+    font-weight: bold;
+    margin-right: -110px;
+    
+}
+
 
 @media(max-width:700px){
 
