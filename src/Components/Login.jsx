@@ -64,7 +64,7 @@ else if (!emailRegex.test(email)) {
 
           <p className="signup-text">
             <b>Don't have an account? </b>
-            <a href ="http://localhost:5173/signup" className="signuplink"> Signup</a>
+            <a href ="https://eternal-education-pied.vercel.app/signup" className="signuplink"> Signup</a>
           </p>
 
           <p className="passresetbutton">

@@ -59,7 +59,7 @@ function Signup() {
 
           <h5 className="login"> Back to login</h5>
           
-          < a href="http://localhost:5173/login" className="loginlink"> Login </a>
+          < a href="https://eternal-education-pied.vercel.app/login" className="loginlink"> Login </a>
 
         </form>
       </div>
