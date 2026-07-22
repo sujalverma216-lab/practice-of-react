@@ -30,7 +30,7 @@ function ForgetPassword() {
             Verify OTP
           </button>
           
-          < a href ="https://eternal-education-pied.vercel.app/login" className="loginlink"> Back to Login</a>
+          <Link to="/login" className="loginlink"> Back to Login</Link>
 
 
           
