@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link} from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../lib/api";
+import { useAuth } from "../context/AuthContext";
 import "./Signup.css";
 
 function Signup() {
@@ -9,6 +10,8 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +21,14 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/signup", {
+      const response = await api.post("/auth/signup", {
         firstName,
         lastName,
         email,
         password
       });
-      alert(response.data.message);
-      // Optional: Redirect to login page here
+      signIn(response.data);
+      navigate("/workspace");
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed");
     }

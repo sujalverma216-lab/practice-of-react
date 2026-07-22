@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import axios from "axios";
+import api from "../lib/api";
 import "./Contact.css";
 
 function Contact() {
@@ -53,7 +53,7 @@ function Contact() {
     setErrorField("");
 
     try {
-      await axios.post("http://localhost:3000/api/contact", {
+      await api.post("/contact", {
         name,
         email,
         message

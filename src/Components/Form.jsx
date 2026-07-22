@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../lib/api";
 import "./Form.css";
 import trading from "../assets/Trading.jpg";
 
@@ -12,7 +12,7 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/student", {
+      await api.post("/student", {
         firstName,
         lastName,
         age: Number(age),

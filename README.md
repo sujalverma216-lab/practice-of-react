@@ -1,18 +1,13 @@
-# React + Vite
+# Eternal Education
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Run locally
 
-Currently, two official plugins are available:
+1. Copy `server/.env.example` to `server/.env` and set `MONGO_URI` and a long, random `JWT_SECRET`.
+2. Start the API: `cd server && npm start`.
+3. In another terminal, start the site: `npm run dev`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Deploy for sign-in on any device
 
-## React Compiler
+Deploy the `server` folder to a Node host (such as Render or Railway), then configure the host with `MONGO_URI`, `JWT_SECRET`, and `CLIENT_ORIGINS` equal to your website URL. In the frontend host, set `VITE_API_URL` to the server's public URL followed by `/api` (for example `https://api.example.com/api`) and redeploy.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Accounts and journals are saved in MongoDB, so they are available wherever a user signs in. Do not commit `.env` files; rotate the MongoDB password that was previously embedded in `server/server.js`.

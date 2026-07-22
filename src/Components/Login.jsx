@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useState, useRef } from "react";
-import axios from "axios";
+import api from "../lib/api";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ function Login() {
   const emailRef = useRef(null);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,14 +28,12 @@ function Login() {
     }  
 
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/login", {
+      const response = await api.post("/auth/login", {
         email,
         password
       });
       
-      // Save token for protected routes
-      localStorage.setItem("token", response.data.token);
-      alert("Login Successful");
+      signIn(response.data);
       navigate("/workspace"); // Redirect to workspace
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");

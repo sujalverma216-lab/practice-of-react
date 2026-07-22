@@ -1,6 +1,6 @@
 import "./Workspace.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../lib/api";
 import Navtotv1 from "../assets/Navtotv1.png";
 import Navtotv2 from "../assets/Navtotv2.png";
 import Navtotv3 from "../assets/Navtotv3.png";
@@ -35,9 +35,7 @@ function Workspace() {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await axios.get("http://localhost:3000/api/trades", {
-            headers: { Authorization: `Bearer ${token}` }
-          });
+          const response = await api.get("/trades");
           setJournal(response.data);
         }
       } catch (error) {
@@ -102,10 +100,7 @@ function Workspace() {
     };
 
     try {
-      const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:3000/api/trades", newTrade, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.post("/trades", newTrade);
       
       // Update local state with the saved trade from the database
       setJournal([...journal, response.data]);

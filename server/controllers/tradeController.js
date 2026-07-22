@@ -1,18 +1,18 @@
 const Trade = require("../models/Trade");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "your_super_secret_key";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware to verify the user's token
 const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token) return res.status(401).json({ message: "Access Denied" });
+  const authorization = req.headers.authorization;
+  if (!authorization?.startsWith("Bearer ")) return res.status(401).json({ message: "Access denied" });
   
   try {
-    const verified = jwt.verify(token.split(" ")[1], JWT_SECRET);
+    const verified = jwt.verify(authorization.slice(7), JWT_SECRET);
     req.user = verified; // Attach the user ID to the request
     next();
   } catch (error) {
-    res.status(400).json({ message: "Invalid Token" });
+    res.status(401).json({ message: "Invalid or expired token" });
   }
 };
 

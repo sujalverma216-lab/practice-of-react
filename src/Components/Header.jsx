@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Header.css";
 import logo from "../assets/Logo.jpg";
 
 function Header() {
   // State to manage whether the mobile menu is open or closed
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   // Function to toggle the menu state
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    signOut();
+    setIsProfileOpen(false);
+    setIsMenuOpen(false);
+    navigate("/");
   };
 
   return (
@@ -52,9 +63,30 @@ function Header() {
             <li>
               <Link to="/form" onClick={toggleMenu}>Form</Link>
             </li>
-            <li>
-              <Link to="/login" onClick={toggleMenu}>Login</Link>
-            </li>
+            {user ? (
+              <li className="profile-container">
+                <button
+                  className="profile-toggle"
+                  type="button"
+                  onClick={() => setIsProfileOpen((open) => !open)}
+                  aria-expanded={isProfileOpen}
+                >
+                  <span className="profile-avatar">{user.firstName?.charAt(0).toUpperCase()}</span>
+                  <span>{user.firstName}</span>
+                </button>
+                {isProfileOpen && (
+                  <div className="profile-menu">
+                    <span className="profile-greeting">Signed in as {user.firstName}</span>
+                    <span className="profile-email">{user.email}</span>
+                    <button type="button" onClick={handleLogout}>Log out</button>
+                  </div>
+                )}
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" onClick={toggleMenu}>Login</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>
