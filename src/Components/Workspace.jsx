@@ -1,5 +1,6 @@
 import "./Workspace.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Navtotv1 from "../assets/Navtotv1.png";
 import Navtotv2 from "../assets/Navtotv2.png";
 import Navtotv3 from "../assets/Navtotv3.png";
@@ -28,6 +29,25 @@ function Workspace() {
   const [quantity, setQuantity] = useState("");
   const [journal, setJournal] = useState([]);
 
+  // Fetch Existing Trades on Load
+  useEffect(() => {
+    const fetchTrades = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await axios.get("http://localhost:3000/api/trades", {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setJournal(response.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch trades", error);
+      }
+    };
+    fetchTrades();
+  }, []);
+
+  // Image Slider Timer
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -52,7 +72,7 @@ function Workspace() {
     const yrs = Number(years);
 
     if (P && rate && yrs) {
-      const r = rate / 12 / 106.7; // Monthly interest rate (Updated from 106.7 to standard 100)
+      const r = rate / 12 / 100; // Monthly interest rate
       const n = yrs * 12; // Total number of months
 
       const totalInvested = P * n;
@@ -69,23 +89,36 @@ function Workspace() {
     }
   };
 
-  // Add Journal Entry
-  const addTrade = () => {
+  // Add Journal Entry via Backend
+  const addTrade = async () => {
     const profit = (Number(sellPrice) - Number(buyPrice)) * Number(quantity);
     const newTrade = {
       stock,
       date,
-      buyPrice,
-      sellPrice,
-      quantity,
+      buyPrice: Number(buyPrice),
+      sellPrice: Number(sellPrice),
+      quantity: Number(quantity),
       profit,
     };
-    setJournal([...journal, newTrade]);
-    setStock("");
-    setDate("");
-    setBuyPrice("");
-    setSellPrice("");
-    setQuantity("");
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post("http://localhost:3000/api/trades", newTrade, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      // Update local state with the saved trade from the database
+      setJournal([...journal, response.data]);
+      
+      // Clear inputs
+      setStock("");
+      setDate("");
+      setBuyPrice("");
+      setSellPrice("");
+      setQuantity("");
+    } catch (error) {
+      alert("Failed to add trade to database. Are you logged in?");
+    }
   };
 
   return (
@@ -97,11 +130,10 @@ function Workspace() {
             <h4>Workspace that works according to you</h4>
           </div>
           
-          {/* NEW WHITE BOX FOR TRADINGVIEW SLIDER */}
           <div className="workspace-slider-box">
             <div 
               className="slider-track" 
-              style={{ transform: `translateX(-${current *100}%)` }}
+              style={{ transform: `translateX(-${current * 100}%)` }}
             >
               {images.map((img, index) => (
                 <img 
@@ -147,7 +179,6 @@ function Workspace() {
 
               <button onClick={calculateSIP}>Calculate</button>
 
-              {/* Three-part Result Breakdown */}
               <div className="sip-results-box">
                 <div className="sip-result-row">
                   <span>Invested amount</span>

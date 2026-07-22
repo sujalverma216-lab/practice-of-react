@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import axios from "axios";
 import "./Contact.css";
 
 function Contact() {
@@ -13,54 +14,57 @@ function Contact() {
   const emailRef = useRef(null);
   const messageRef = useRef(null);
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
-if (name.trim() === "") {
-  setErrorField("name");
-  nameRef.current.focus();
-  return;
-}
+    if (name.trim() === "") {
+      setErrorField("name");
+      nameRef.current.focus();
+      return;
+    } else if (!nameRegex.test(name)) {
+      alert("Invalid Name! Try Again. ");
+      setErrorField("name");
+      nameRef.current.focus();
+      return;
+    }
 
-else if (!nameRegex.test(name)) {
-  alert("Invalid Name! Try Again. ");
-  setErrorField("name");
-  nameRef.current.focus();
-  return;
-}
-
-if (email.trim() === "") {
+    if (email.trim() === "") {
       setErrorField("email");
       emailRef.current.focus();
       return;
+    } else if (!emailRegex.test(email)) {
+      alert("Enter a valid Email Address.");
+      setErrorField("email");
+      emailRef.current.focus();
+      return;    
     }
-else if (!emailRegex.test(email)) {
-  alert("Enter a valid Email Address.");
-  setErrorField("email");
-  emailRef.current.focus();
-  return;    
-}
 
-if (message.trim() === "") {
+    if (message.trim() === "") {
       setErrorField("message");
       messageRef.current.focus();
       return;
-    }
-
-else if (!messageRegex.test(message)) {
-  alert("Message should contain at least 10 characters.");
-  setErrorField("message");
-  messageRef.current.focus();
-  return;
-}    
+    } else if (!messageRegex.test(message)) {
+      alert("Message should contain at least 10 characters.");
+      setErrorField("message");
+      messageRef.current.focus();
+      return;
+    }    
 
     setErrorField("");
 
-    alert("Message Sent Successfully!");
-
-    setName("");
-    setEmail("");
-    setMessage("");
+    try {
+      await axios.post("http://localhost:3000/api/contact", {
+        name,
+        email,
+        message
+      });
+      alert("Message Sent Successfully!");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   return (
