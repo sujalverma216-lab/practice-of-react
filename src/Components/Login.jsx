@@ -71,7 +71,7 @@ function Login() {
 
           <p className="signup-text">
             <b>Don't have an account? </b>
-            <a href="https://eternal-education-pied.vercel.app/signup" className="signuplink"> Signup</a>
+            <Link to="/signup" className="signuplink"> Signup</Link>
           </p>
 
           <p className="passresetbutton">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link} from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
 
@@ -67,7 +68,7 @@ function Signup() {
           <button type="submit" className="signup-btn">Create Account</button>
           
           <h5 className="login">Back to login</h5>
-          <a href="https://eternal-education-pied.vercel.app/login" className="loginlink"> Login </a>
+          <Link to="/login" className="loginlink"> Login </Link>
         </form>
       </div>
     </div>
