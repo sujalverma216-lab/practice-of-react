@@ -1,7 +1,7 @@
 const app = require("./app");
 const mongoose = require("mongoose");
 
-// UPDATE 1: Render will assign a dynamic port, so we must use process.env.PORT
+// Render assigns a dynamic port, so we must use process.env.PORT
 const PORT = process.env.PORT || 3000;
 
 // Your MongoDB Atlas URI
