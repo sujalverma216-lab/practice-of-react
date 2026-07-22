@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-// Import Routes (You will create these next)
+// Import Routes
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const studentRoutes = require("./routes/studentRoutes");
@@ -10,9 +10,11 @@ const tradeRoutes = require("./routes/tradeRoutes");
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parses incoming JSON requests
+app.use(express.json()); 
+
+// UPDATE 2: Allow requests from BOTH your local React and your live Vercel app
 app.use(cors({
-    origin: "http://localhost:5173", // Only allow your frontend port
+    origin: ["http://localhost:5173", "https://eternal-education-pied.vercel.app"], 
     credentials: true
 }));
 
