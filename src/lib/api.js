@@ -6,6 +6,11 @@ const getBaseUrl = () => {
   return url.endsWith("/") ? `${url}api` : `${url}/api`;
 };
 
+const token = localStorage.getItem("token");
+const response = await api.post("/api/trades", newTrade, {
+  headers: { Authorization: `Bearer ${token}` }
+});
+
 const api = axios.create({
   baseURL: getBaseUrl(),
 });

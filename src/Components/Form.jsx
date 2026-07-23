@@ -12,7 +12,7 @@ function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/student", {
+      await api.post("api/student", {
         firstName,
         lastName,
         age: Number(age),
