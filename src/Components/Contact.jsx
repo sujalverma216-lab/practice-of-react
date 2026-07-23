@@ -7,9 +7,9 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");  
   const [errorField, setErrorField] = useState("");
-  const nameRegex = /^[A-Z][a-z]+$/;
+  const nameRegex = /^[a-zA-Z\s'-]{2,}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const messageRegex = /^.{10,}$/;
+  const messageRegex = /^.{3,}$/;
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);

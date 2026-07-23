@@ -113,7 +113,7 @@ nav a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+  
 .profile-menu button {
   width: 100%;
   border: 0;
@@ -187,4 +187,7 @@ nav a:hover {
     width: calc(100% - 24px);
     box-sizing: border-box;
   }
+
+
+ 
 }

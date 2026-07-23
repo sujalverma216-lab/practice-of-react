@@ -35,7 +35,7 @@ function Workspace() {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await api.get("/trades");
+          const response = await api.get("api/trades");
           setJournal(response.data);
         }
       } catch (error) {
@@ -100,7 +100,7 @@ function Workspace() {
     };
 
     try {
-      const response = await api.post("/trades", newTrade);
+      const response = await api.post("api/trades", newTrade);
       
       // Update local state with the saved trade from the database
       setJournal([...journal, response.data]);
@@ -177,7 +177,7 @@ function Workspace() {
               <div className="sip-results-box">
                 <div className="sip-result-row">
                   <span>Invested amount</span>
-                  <span style={{color: "green"}} >{formatCurrency(investedAmount)}</span>
+                  <span style={{color: "blue"}} >{formatCurrency(investedAmount)}</span>
                 </div>
                 <div className="sip-result-row">
                   <span>Est. returns</span>
