@@ -21,12 +21,17 @@ function Signup() {
     }
 
     try {
-      const response = await api.post("api/auth/signup", {
+      const response = await api.post("/auth/signup", {
         firstName,
         lastName,
         email,
         password
       });
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
       signIn(response.data);
       navigate("/workspace");
     } catch (error) {

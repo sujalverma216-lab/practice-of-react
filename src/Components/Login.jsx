@@ -28,13 +28,18 @@ function Login() {
     }  
 
     try {
-      const response = await api.post("api/auth/login", {
+      const response = await api.post("/auth/login", {
         email,
         password
       });
       
+      // Save token explicitly to ensure auth persistence
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+      
       signIn(response.data);
-      navigate("/workspace"); // Redirect to workspace
+      navigate("/workspace");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
