@@ -35,7 +35,7 @@ function Workspace() {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await api.get("api/trades");
+          const response = await api.get("/trades");
           setJournal(response.data);
         }
       } catch (error) {
@@ -100,7 +100,7 @@ function Workspace() {
     };
 
     try {
-      const response = await api.post("api/trades", newTrade);
+      const response = await api.post("/trades", newTrade);
       
       // Update local state with the saved trade from the database
       setJournal([...journal, response.data]);
